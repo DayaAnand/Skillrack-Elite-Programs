@@ -1,0 +1,51 @@
+import java.util.*;
+public class Hello {
+
+    public static void main(String[] args) {
+		//Your Code Here
+		Scanner ip = new Scanner(System.in);
+		int iter = ip.nextInt();
+	for(int i=0;i<iter;i++){  //TC..
+	    int R=ip.nextInt();
+	    int C=ip.nextInt();
+	    int matrix[][] = new int[R][C];
+	    int firstmax=0,secondmax=0;
+	    for(int row=0;row<R;row++){
+	        for(int col=0;col<C;col++){
+	            if(row==0){
+	                matrix[row][col] = ip.nextInt();
+	                if(firstmax < matrix[row][col]){
+	                    secondmax = firstmax;
+	                    firstmax = matrix[row][col];
+	                }
+	                else if(matrix[row][col] > secondmax && secondmax < firstmax){
+	                    secondmax = matrix[row][col];
+	                }
+	                
+	            }  //correct..
+	            // other rows .. second onwards.. need to check with max..
+	            else{
+	                matrix[row][col] = ip.nextInt();
+	                if(matrix[row-1][col] != firstmax){   // if the above element 
+	                //has morethan firstmax then we need to add secondmax
+	                    matrix[row][col] +=firstmax;
+	                }
+	                else{
+	                    matrix[row][col] += secondmax;
+	                }
+	            }
+	   }// column loop ends..
+	            if(row!=0){
+	            int prevRow[] = Arrays.copyOf(matrix[row],C);
+	            Arrays.sort(prevRow);
+	            firstmax = prevRow[C-1];
+	            secondmax = prevRow[C-2];
+	            } // second row to end row..
+	        //    System.out.println(firstmax +" "+secondmax);
+	    }
+
+
+	  System.out.println(firstmax);
+	}
+}
+}
